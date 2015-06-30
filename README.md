@@ -1,4 +1,4 @@
-## Simple Coffeshop Order example with Jersey, GSON and Embedded DB
+## Simple Coffeshop Order example with AngularJS, Jersey, GSON and Embedded DB
 
 * Assuming you're already installed maven and java7 or java8
 * not required but nice to have a foreman
