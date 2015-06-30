@@ -37,9 +37,25 @@ app.controller('BeverageController', function ($scope, $http) {
         });
     };
 
-    $scope.addBeverage = function () {
-        $scope.total = $scope.drink.price;
+    $scope.cancel = function () {
+        $scope.drink = null;
+        $scope.size = null;
+        $scope.syrup = null;
+        $scope.extra = null;
+
+        $scope.total = 0;
+        $scope.size_total = 0;
+        $scope.syrup_total = 0;
+        $scope.extra_total = 0;
     };
+
+    $scope.addBeverage = function () {
+        addAll();
+    };
+
+    function addAll() {
+        $scope.total = $scope.drink.price + $scope.syrup_total + $scope.extra_total + $scope.size_total;
+    }
 
     $scope.changeSize = function () {
         $http.get('/price/size/' + $scope.size).
@@ -78,4 +94,16 @@ app.controller('BeverageController', function ($scope, $http) {
 
             });
     };
+
+    $scope.cancelExtra = function () {
+        $scope.extra = null;
+        $scope.extra_total = 0;
+        addAll();
+    }
+
+    $scope.cancelSyrup = function () {
+        $scope.syrup = null;
+        $scope.syrup_total = 0;
+        addAll();
+    }
 });

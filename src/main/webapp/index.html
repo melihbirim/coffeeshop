@@ -27,12 +27,14 @@
             <form class="CoffeeForm" role="form" ng-submit="giveMeCoffee()">
                 <div class="form-group">
                     <label for="drink" class="control-label">Drink</label>
-                    <select ng-model="drink" ng-options="b.name for b in beverages | orderBy:'name'" ng-required="true"
+                    <select ng-init="drink = beverages[0]" ng-model="drink"
+                            ng-options="b.name for b in beverages | orderBy:'name'" ng-required="true"
                             class="form-control" ng-change="addBeverage()"> </select>
                 </div>
                 <div class="form-group">
                     <label for="drink.sizes" class="control-label">Size</label>
-                    <select ng-model="size" ng-options="size for size in drink.sizes" ng-required="true"
+                    <select ng-init="size = drink.sizes[0]" ng-model="size" ng-options="size for size in drink.sizes"
+                            ng-required="true"
                             class="form-control" ng-change="changeSize()"> </select>
                 </div>
                 <div class="form-group">
@@ -63,10 +65,12 @@
                             {{size}}
                         </li>
                         <li class="list-group-item" ng-show="syrup_total != 0">
+                            <span class="badge" ng-click="cancelSyrup()"> X</span>
                             <span class="badge">{{syrup_total}} TL</span>
                             {{syrup}}
                         </li>
                         <li class="list-group-item" ng-show="extra_total != 0">
+                            <span class="badge" ng-click="cancelExtra()"> X</span>
                             <span class="badge">{{extra_total}} TL</span>
                             {{extra}}
                         </li>
@@ -76,19 +80,34 @@
 
                     <h2> {{total}} TL</h2>
                     <button ng-click="order()" class="btn btn-primary btn-raised btn-lg" data-toggle="modal"
-                            data-target="#simple-dialog">Order
+                            data-target="#order-dialog">Order
+                        <div class="ripple-wrapper"></div>
+                    </button>
+                    <button ng-click="cancel()" class="btn btn-primary btn-raised btn-lg" data-toggle="modal"
+                            data-target="#cancel-dialog">Cancel
                         <div class="ripple-wrapper"></div>
                     </button>
                 </div>
             </div>
         </div>
-        <div id="simple-dialog" class="modal fade" tabindex="-1">
+        <div id="order-dialog" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <center><p>
+                            <h1>{{message}}</h1></p></center>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="cancel-dialog" class="modal fade" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
                         <center><p>
 
-                            <h1>{{message}}</h1></p></center>
+                            <h1>Cancel it??? :'(</h1></p></center>
                     </div>
                 </div>
             </div>
