@@ -27,24 +27,26 @@
             <form class="CoffeeForm" role="form">
                 <div class="form-group">
                     <label for="drink" class="control-label">Drink</label>
-                    <select ng-init="drink = beverages[0]" ng-model="drink"
+                    <select id="drink" ng-init="drink = beverages[0]" ng-model="drink"
                             ng-options="b.name for b in beverages | orderBy:'name'" ng-required="true"
                             class="form-control" ng-change="addBeverage()"> </select>
                 </div>
                 <div class="form-group">
                     <label for="drink.sizes" class="control-label">Size</label>
-                    <select ng-init="size = drink.sizes[0]" ng-model="size" ng-options="size for size in drink.sizes"
+                    <select id="drink.sizes" ng-init="size = drink.sizes[0]" ng-model="size"
+                            ng-options="size for size in drink.sizes"
                             ng-required="true"
                             class="form-control" ng-change="changeSize()"> </select>
                 </div>
                 <div class="form-group">
                     <label for="drink.syrup" class="control-label">Syrup</label>
-                    <select ng-model="syrup" ng-options="syrup for syrup in syrups" ng-required="true"
+                    <select id="drink.syrup" ng-model="syrup" ng-options="syrup for syrup in syrups" ng-required="true"
                             class="form-control" ng-change="changeSyrup()"> </select>
                 </div>
                 <div class="form-group">
                     <label for="drink.extra" class="control-label">Extras</label>
-                    <select ng-model="extra" ng-options="extra for extra in drink.extras" ng-required="true"
+                    <select id="drink.extra" ng-model="extra" ng-options="extra for extra in drink.extras"
+                            ng-required="true"
                             class="form-control" ng-change="changeExtra()"> </select>
                 </div>
             </form>
@@ -91,10 +93,11 @@
             </div>
         </div>
         <div id="order-dialog" class="modal fade" tabindex="-1">
-        <div class="modal-dialog">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
                         <center><p>
+
                             <h1>{{message}}</h1></p></center>
                     </div>
                 </div>
